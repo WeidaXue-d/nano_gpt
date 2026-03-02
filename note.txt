@@ -1,16 +1,16 @@
 Data Loading
-
      tokenization
-     txt to torch tensor
+     torch tensor
 
-Embedding & Positional Encoding
-
-
+Input representation
+    Embedding
+    Positional Encoding
 
 The Transformer Blocks
-
-
+    self-attention
+    feed-forward
 
 The Language Model Head
+    
 
 
