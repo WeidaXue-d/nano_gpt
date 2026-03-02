@@ -1,0 +1,16 @@
+Data Loading
+
+     tokenization
+     txt to torch tensor
+
+Embedding & Positional Encoding
+
+
+
+The Transformer Blocks
+
+
+
+The Language Model Head
+
+
