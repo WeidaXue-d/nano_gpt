@@ -1,4 +1,4 @@
-# nano_# Nano GPT: From-Scratch Implementation 🚀
+# nano_# Nano GPT: From-Scratch Implementation 
 
 A minimal, character-level generative language model based on the **Transformer architecture**, trained on the Tiny Shakespeare dataset.
 
