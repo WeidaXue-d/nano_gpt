@@ -62,3 +62,6 @@ logits, loss = m(xb, yb)
 
 print(f"(B, T, C): {logits.shape}")
 print(f"loss: {loss}")
+
+context = torch.zeros((1,1), dtype = torch.long)
+print(decode(m.generate(context, max_new_tokens = 100)[0].tolist()))
