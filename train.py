@@ -1,4 +1,5 @@
 import torch # type: ignore
+from model import BigramLanguageModel
 
 with open('input.txt','r',encoding='utf-8') as f:
     text = f.read()
@@ -55,3 +56,9 @@ for t in range(block_size):
     target = yb[0,t]
     print(f'input: {context}, target: {target}')
 
+m = BigramLanguageModel(vocab_size)
+
+logits, loss = m(xb, yb)
+
+print(f"(B, T, C): {logits.shape}")
+print(f"loss: {loss}")
