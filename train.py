@@ -65,3 +65,22 @@ print(f"loss: {loss}")
 
 context = torch.zeros((1,1), dtype = torch.long)
 print(decode(m.generate(context, max_new_tokens = 100)[0].tolist()))
+
+optimizer = torch.optim.AdamW(m.parameters(), lr = 1e-3) #learning rate 0.001
+
+batch_size = 64
+
+for steps in range(10000):
+    xb, yb = get_batch('train')
+
+    logits, loss = m(xb, yb)
+    
+    #Backward
+    optimizer.zero_grad(set_to_none = True)
+    loss.backward()
+    optimizer.step()
+    if steps % 100 == 0:
+        print(f"step: {steps} loss :{loss.item():.4f}")
+
+context = torch.zeros((1,1), dtype = torch.long)
+print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
