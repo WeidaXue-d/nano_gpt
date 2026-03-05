@@ -37,3 +37,34 @@
 * **Variable Scope**: Resolved an `UnboundLocalError` caused by a naming inconsistency between `target` (singular) and `targets` (plural). This highlighted the importance of strict naming conventions in large-scale Python projects.
 * **Stochastic Generation**: Observed that the model currently outputs gibberish (e.g., `!no3'IHETgl?`). This confirms the generation pipeline is functional, but the model lacks "knowledge" due to the absence of a training loop.
 
+
+# Development Log - Day 3: Self-Attention & Positional Encoding 
+
+## March 5, 2026
+
+### Objectives
+* Transition from a local Bigram model to a global **Self-Attention** mechanism.
+* Implement **Positional Embeddings** to provide the model with spatial awareness.
+* Optimize the **Inference Pipeline** to handle sequence length constraints.
+
+### Key Achievements
+* **Single Head Attention (`Head` class)**:
+    * Implemented the **Query (Q)**, **Key (K)**, and **Value (V)** linear transformations.
+    * Developed the **Scaled Dot-Product Attention** formula: $Attention(Q, K, V) = \text{softmax}(\frac{QK^T}{\sqrt{d_k}})V$.
+    * Applied a **Lower Triangular Mask (tril)** to prevent the model from "cheating" by looking at future tokens during training.
+* **Positional Awareness**:
+    * Integrated a `position_embedding_table` to encode the order of characters within the `block_size` window.
+    * Combined token embeddings with positional embeddings ($x = \text{tok\_emb} + \text{pos\_emb}$) to create time-aware input vectors.
+* **Architectural Refactoring**:
+    * Upgraded the model from a direct lookup table to a deep learning pipeline: Embedding -> Attention -> Linear Head.
+
+### Engineering Insights & Debugging
+* **Scope & Naming Consistency**: Resolved an `UnboundLocalError` caused by inconsistent variable casing (`X` vs `x`). Standardized all tensor variables to lowercase `x` for clarity.
+* **Index Error Handling**: Fixed an `IndexError: index out of range` in the `generate` function. Learned that since positional embeddings are fixed to `block_size`, the input sequence must be cropped using `idx[:, -block_size:]` before being fed into the model.
+* **Module Architecture**: Fixed an `AttributeError` by merging redundant class definitions and ensuring the `generate` method was correctly localized within the final `nn.Module` class.
+
+###  Current Status
+* **Data Layer**: Complete
+* **Attention Mechanism**:  Operational (Single Head)
+* **Training Loop**: Functional with Attention
+* **Loss Performance**: Initial stochastic loss observed at ~4.2, ready for high-step training.
