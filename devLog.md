@@ -68,3 +68,27 @@
 * **Attention Mechanism**:  Operational (Single Head)
 * **Training Loop**: Functional with Attention
 * **Loss Performance**: Initial stochastic loss observed at ~4.2, ready for high-step training.
+
+# Development Log - Day 3: Multi-Head Attention & Block Architecture 
+## March 8, 2026
+
+### Objectives
+* Scale from Single-Head Attention to **Multi-Head Attention (MHA)** for parallel feature extraction.
+* Implement the **Feed Forward Network (FFN)** to introduce non-linear processing per token.
+* Establish the **Transformer Block** structure using **Residual Connections**.
+
+### Key Achievements
+* **Multi-Head Attention (`MultiHeadAttention` class)**:
+    * Orchestrated 4 parallel attention heads, each focusing on different segments of the 32-dimensional embedding space ($head\_size = 8$).
+    * Implemented a **Projection Layer** (`self.proj`) to re-integrate multi-head outputs into the residual stream.
+* **Feed Forward Evolution**:
+    * Built a `FeedForward` module with a hidden layer expansion of $4 \times n\_embd$ and **ReLU activation**.
+    * Enabled the model to perform "individual thinking" on top of the "communication" provided by attention.
+* **Optimization & Training**:
+    * Scaled `batch_size` to **64** and `max_steps` to **10,000**.
+    * Successfully dropped **Loss from 4.2 to 2.06**, a significant leap in predictive accuracy.
+
+### 💡Engineering Insights & Debugging
+* **Residual Connections ($x = x + f(x)$)**: Learned how adding the original input back to the output of a sub-layer prevents gradient vanishing and allows for deeper networks.
+* **Dimensional Alignment**: Carefully managed the tensor shapes across MHA and FFN to ensure $(B, T, C)$ consistency.
+* **Emergent Properties**: Observed the model starting to "invent" Shakespearean formatting (e.g., `NAME:`, verse line breaks, and archaic

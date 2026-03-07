@@ -80,7 +80,7 @@ for steps in range(10000):
     loss.backward()
     optimizer.step()
     if steps % 100 == 0:
-        print(f"step: {steps} loss :{loss.item():.4f}")
+        print(f"step: {steps} loss: {loss.item():.4f}")
 
 context = torch.zeros((1,1), dtype = torch.long)
 print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
