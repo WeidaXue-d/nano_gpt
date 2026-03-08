@@ -45,6 +45,7 @@ def get_batch(split):
 optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4)
 
 batch_size = 64 
+'''
 for steps in range(30000):
     xb, yb = get_batch('train')
 
@@ -59,10 +60,11 @@ for steps in range(30000):
     if steps % 500 == 0:
         print(f"step: {steps} loss: {loss.item():.4f}")
         torch.save(model.state_dict(), checkpoint_path)
+        '''
 
 
 context = torch.zeros((1,1), dtype=torch.long, device=device)
-print(decode(model.generate(context, max_new_tokens=500)[0].tolist()))
+print(decode(model.generate(context, max_new_tokens=2000)[0].tolist()))
 
 '''
 import torch # type: ignore

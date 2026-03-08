@@ -91,4 +91,13 @@
 ### 💡Engineering Insights & Debugging
 * **Residual Connections ($x = x + f(x)$)**: Learned how adding the original input back to the output of a sub-layer prevents gradient vanishing and allows for deeper networks.
 * **Dimensional Alignment**: Carefully managed the tensor shapes across MHA and FFN to ensure $(B, T, C)$ consistency.
-* **Emergent Properties**: Observed the model starting to "invent" Shakespearean formatting (e.g., `NAME:`, verse line breaks, and archaic
+* **Emergent Properties**: Observed the model starting to "invent" Shakespearean formatting e.g., `NAME:`, verse line breaks, and archaic
+
+### 🏆 Milestone: Project "Shakespeare GPT" Completed
+- **Timestamp**: 2026-03-08 12:10 PM
+- **Performance**: Final training loss reached 1.0718.
+- **Output Validation**: Generated 2000 chars of high-fidelity Shakespearean dialogue.
+- **Engineering Accomplishments**: 
+    1. Built a deep Transformer architecture from scratch (6 layers, 6 heads).
+    2. Implemented robust checkpoint saving/loading logic.
+    3. Solved critical hardware-specific (MPS) and architectural (block_size) bugs.
